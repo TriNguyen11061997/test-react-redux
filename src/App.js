@@ -1,5 +1,4 @@
 import React from "react";
-import "./App.css";
 import ListBreed from "./containers/ShowListBreed";
 class App extends React.Component {
   render() {

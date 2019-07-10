@@ -59,16 +59,12 @@ export const getListSubBreedRequest = id => {
     }
 }
 
-
-
 export const getListBreedAndImage = data => {
     return dispatch => {
         dispatch(getListBreed(data));
         dispatch(getImageRequest())
     }
 }
-
-
 
 export const getImageRequest = () => {
     return dispatch => {

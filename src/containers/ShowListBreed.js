@@ -11,11 +11,6 @@ const mapStateToProps = (state, ownProps) => ({
     sub_breed : state.breed.sub_breed
 });
 
-// const mapDispatchToProps = dispatch => ({
-//     handleDelete: i => dispatch(del(i)),
-//     onChange: (value, i) => dispatch(changeCount(i, value))
-// });
-
 const mapDispatchToProps = {
     getListBreed: getListBreedRequest,
     handleChange: changeBreedRequest,

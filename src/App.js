@@ -9,9 +9,6 @@ class App extends React.Component {
           <div className="col-sm-6">
             <ListBreed />
           </div>
-          <div className="col-sm-6">
-          
-          </div>
         </div>
       </div>
     );

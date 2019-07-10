@@ -1,6 +1,16 @@
-.App {
-  text-align: center;
+
+.App1 {
+  float: left;
 }
+
+.App2 {
+  float: right;
+}
+.App3 {
+  display: flex;
+}
+
+
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

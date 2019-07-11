@@ -26,6 +26,10 @@ export const changeSubBreed = (data) => ({
     data
 })
 
+export const isLoading = () => ({
+    type: 'IS_LOADING',
+})
+
 
 export const getListBreedRequest = () => {
     return dispatch => {
@@ -63,11 +67,13 @@ export const getListBreedAndImage = data => {
     return dispatch => {
         dispatch(getListBreed(data));
         dispatch(getImageRequest())
+        
     }
 }
 
 export const getImageRequest = () => {
     return dispatch => {
+        dispatch(isLoading())
         callAPI(`breeds/image/random`, 'GET', null).then(res => {
             return dispatch(getImage(res.data.message))
         })
@@ -76,6 +82,7 @@ export const getImageRequest = () => {
 
 export const getImageByBreedRequest = id => {
     return dispatch => {
+        dispatch(isLoading())
         callAPI(`breed/${id}/images/random`, 'GET', null).then(res => {
             return dispatch(getImage(res.data.message))
         })
@@ -84,6 +91,7 @@ export const getImageByBreedRequest = id => {
 
 export const getImageBySubBreedRequest = (id, idsub) => {
     return dispatch => {
+        dispatch(isLoading())
         callAPI(`breed/${id}/${idsub}/images/random`, 'GET', null).then(res => {
             return dispatch(getImage(res.data.message))
         })

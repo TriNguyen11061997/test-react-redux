@@ -1,6 +1,6 @@
 import Image from "../components/Images";
 import { connect } from "react-redux";
-import { getImageRequest} from "../actions/index";
+import { isLoading,getImageRequest} from "../actions/index";
 
 
 const mapStateToProps = (state, ownProps) => ({
@@ -13,6 +13,7 @@ const mapStateToProps = (state, ownProps) => ({
 // });
 
 const mapDispatchToProps = {
+    loading :isLoading,
     getImage: getImageRequest,
     handleClick : getImageRequest, 
 }

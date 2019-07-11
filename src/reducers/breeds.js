@@ -15,7 +15,8 @@ const breed = (state = { listBreed: [], breed: "", listSubBreed: [],sub_breed:""
     case "CHANGE_BREED":
       return {
         ...state,
-        breed: action.data
+        breed: action.data,
+        sub_breed: "all",
       };
     case "CHANGE_SUBBREED":
       return {

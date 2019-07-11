@@ -1,35 +1,82 @@
 import React from "react";
 import Image from "./Image";
+import SelectSearch from 'react-select-search'
+import Loading from "./Loading";
 class ListBreed extends React.Component {
+
+
 
     componentDidMount() {
         this.props.getListBreed();
     }
 
+    renderFontValue(label, option) {
+        return <span style={{ fontFamily: option['data-stack'] }}>{label}</span>;
+    }
+
+    renderFontOption(option) {
+        let style = {
+            fontFamily: option['data-stack']
+        };
+
+        return <span style={style}>{option.name}</span>;
+    }
+
+    loadImage = (src) => {
+        if (this.props.is_loading) {
+            return <Loading />
+        }
+        else {
+            return <Image src={src} />
+        }
+    }
+
     render() {
-        const { sub_breed, breed, sub_breeds, image, handleClick, handleClickForAll, handleChangeSub, breeds, handleChange, handleClickSub } = this.props,
-            MakeItem = function (X) {
-                return <option key={X}>{X}
-                </option>;
-            };
+        const {is_loading,sub_breed, breed, sub_breeds, image, handleClick, handleClickForAll, handleChangeSub, breeds, handleChange, handleClickSub } = this.props;
+        // MakeItem = function (X) {
+        //     return <option key={X}>{X}
+        //     </option>;
+        // };
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-4">
-                        <select className="form-control" onChange={event =>
-                            handleChange(event.target.value)}>
-                            <option>all</option>
-                            {breeds.map(MakeItem)}
-                        </select>
+                    <div className="col-md-6">
+                        <SelectSearch
+                            className="select-search-box"
+                            value={breed}
+                            onChange={
+                                (obtion, state, props) => {
+                                    handleChange(obtion.value);
+                                }
+                            }
+                            renderOption={this.renderFontOption}
+                            renderValue={this.renderFontValue}
+                            options={breeds.map((item) => {
+                                return {
+                                    name: item,
+                                    value: item
+                                }
+                            })}
+                            placeholder="Breed" />
                     </div>
-                    <div className="col-md-4">
-                        <select className="form-control" onChange={event => {
-                            event.target.value === "all" ? handleChange(breed) : handleChangeSub(breed, event.target.value);
-                        }
-                        }>
-                            <option>all</option>
-                            {sub_breeds.map(MakeItem)}
-                        </select>
+                    <div className="col-md-6">
+                        <SelectSearch
+                            className="select-search-box"
+                            value={sub_breed}
+                            onChange={
+                                (obtion, state, props) => {
+                                    obtion.value === "all" ? handleChange(breed) : handleChangeSub(breed, obtion.value);
+                                }
+                            }
+                            renderOption={this.renderFontOption}
+                            renderValue={this.renderFontValue}
+                            options={sub_breeds.map((item) => {
+                                return {
+                                    name: item,
+                                    value: item
+                                }
+                            })}
+                            placeholder="Sub Breed" />
                     </div>
                     <div className="col-md-4">
                         <button className="btn btn-primary" onClick={() => {
@@ -42,11 +89,9 @@ class ListBreed extends React.Component {
                     </div>
                 </div>
                 <hr></hr>
-                <Image src={image} />
+                <Loading />
+                <Image src={image} hidden={is_loading}/>
             </div>
-
-
-
         )
     }
 }
